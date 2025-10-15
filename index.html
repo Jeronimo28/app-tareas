@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Gestor de tareas simple y eficiente">
   <meta name="theme-color" content="#f4d19b">
+  
+  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self' https:;
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https:;
-  style-src 'self' 'unsafe-inline' https:;
-  font-src 'self' https: data:;
-  img-src 'self' https: data: blob:;
-  connect-src 'self' https:;
-  manifest-src 'self';
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data:;
+    font-src 'self' data:;
   ">
+  
   <title>Gestor de Tareas</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
@@ -25,7 +26,7 @@
     <h1>Mis Tareas</h1>
 
     <div class="input-group">
-      <input type="text" id="nuevaTarea" placeholder="Escribe una tarea...">
+      <input type="text" id="nuevaTarea" placeholder="Escribe una tarea..." aria-label="Nueva tarea">
       <button id="agregarTarea">Agregar</button>
     </div>
 
@@ -41,11 +42,15 @@
 
   <script>
     if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-        .then(() => console.log('Service Worker registrado'))
-        .catch(err => console.log('Error al registrar SW:', err));
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('✅ Service Worker registrado'))
+        .catch(err => console.log('❌ Error al registrar SW:', err));
     }
-</script>
-
+    
+    // Verificar que los recursos carguen
+    window.addEventListener('load', () => {
+      console.log('🚀 App cargada correctamente');
+    });
+  </script>
 </body>
 </html>
