@@ -1,0 +1,106 @@
+body {
+  font-family: 'Patrick Hand', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7e6d0; /* color papel antiguo */
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.container {
+  background: #fff9f2;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border-left: 8px solid #f4d19b; /* margen estilo libreta */
+  position: relative;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6b4f2f;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #f4d19b;
+  background: #fffaf0;
+  font-family: 'Patrick Hand', cursive;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #f4d19b;
+  color: #6b4f2f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-family: 'Patrick Hand', cursive;
+}
+
+button:hover {
+  background-color: #e3c28b;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  border-top: 2px dashed #f4d19b;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fffaf0;
+  border-bottom: 1px dashed #f4d19b;
+  border-radius: 5px;
+  font-family: 'Patrick Hand', cursive;
+}
+
+li.done span {
+  text-decoration: line-through;
+  color: gray;
+}
+
+li span {
+  flex: 1;
+  margin-left: 10px;
+}
+
+li button {
+  margin-left: 5px;
+  background-color: #f0804f;
+}
+
+li button:hover {
+  background-color: #e0663f;
+}
+
+/* Líneas de libreta */
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 2px;
+  height: 100%;
+  background: #f4d19b;
+}

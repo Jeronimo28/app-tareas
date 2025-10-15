@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de Tareas</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="container">
+    <h1>Mis Tareas</h1>
+
+    <div class="input-group">
+      <input type="text" id="nuevaTarea" placeholder="Escribe una tarea...">
+      <button id="agregarTarea">Agregar</button>
+    </div>
+
+    <div class="botones">
+      <button id="eliminarHechas">Eliminar hechas</button>
+      <button id="eliminarTodas">Eliminar todas</button>
+    </div>
+
+    <ul id="listaTareas"></ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
