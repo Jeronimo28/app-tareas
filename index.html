@@ -6,13 +6,15 @@
   <meta name="description" content="Gestor de tareas simple y eficiente">
   <meta name="theme-color" content="#f4d19b">
   
-  <!-- Content Security Policy -->
+  <!-- Content Security Policy más permisiva -->
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline';
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' data:;
-    font-src 'self' data:;
+    default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: blob: https:;
+    connect-src 'self';
+    manifest-src 'self';
   ">
   
   <title>Gestor de Tareas</title>
@@ -20,36 +22,57 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-192.png">
+  
+  <!-- Preload de fuentes si las usas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
   <div class="container">
     <h1>Mis Tareas</h1>
 
+    <!-- Formulario corregido con label e id -->
     <div class="input-group">
-      <input type="text" id="nuevaTarea" placeholder="Escribe una tarea..." aria-label="Nueva tarea">
-      <button id="agregarTarea">Agregar</button>
+      <label for="nuevaTarea" class="sr-only">Nueva tarea</label>
+      <input type="text" id="nuevaTarea" name="nuevaTarea" placeholder="Escribe una tarea..." aria-label="Nueva tarea">
+      <button type="button" id="agregarTarea" aria-label="Agregar tarea">Agregar</button>
     </div>
 
     <div class="botones">
-      <button id="eliminarHechas">Eliminar hechas</button>
-      <button id="eliminarTodas">Eliminar todas</button>
+      <button type="button" id="eliminarHechas" aria-label="Eliminar tareas completadas">Eliminar hechas</button>
+      <button type="button" id="eliminarTodas" aria-label="Eliminar todas las tareas">Eliminar todas</button>
     </div>
 
-    <ul id="listaTareas"></ul>
+    <ul id="listaTareas" aria-label="Lista de tareas"></ul>
   </div>
 
   <script src="app.js"></script>
 
   <script>
+    // Service Worker con mejor manejo de errores
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(() => console.log('✅ Service Worker registrado'))
-        .catch(err => console.log('❌ Error al registrar SW:', err));
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('✅ Service Worker registrado:', registration);
+          })
+          .catch(err => {
+            console.log('❌ Error al registrar SW:', err);
+          });
+      });
     }
     
-    // Verificar que los recursos carguen
+    // Verificar recursos
     window.addEventListener('load', () => {
       console.log('🚀 App cargada correctamente');
+      
+      // Verificar íconos
+      ['icon-192.png', 'icon-512.png'].forEach(icon => {
+        const img = new Image();
+        img.onload = () => console.log(`✅ ${icon} cargado`);
+        img.onerror = () => console.log(`❌ ${icon} no encontrado`);
+        img.src = icon;
+      });
     });
   </script>
 </body>
