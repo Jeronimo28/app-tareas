@@ -1,18 +1,16 @@
 self.addEventListener('install', e => {
+  self.skipWaiting();
   e.waitUntil(
-    caches.open('tareas-cache').then(cache => {
-      return cache.addAll([
-        './',
-        './index.html',
-        './style.css',
-        './app.js'
-      ]);
-    })
+    caches.open('tareas-cache').then(cache => cache.addAll([
+      './',
+      './index.html',
+      './style.css',
+      './app.js',
+      './icon.png'
+    ]))
   );
 });
 
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(response => response || fetch(e.request))
-  );
+self.addEventListener('activate', e => {
+  e.waitUntil(clients.claim());
 });
