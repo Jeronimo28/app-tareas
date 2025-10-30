@@ -30,7 +30,24 @@
     <div class="input-group">
       <label for="nuevaTarea" class="sr-only">Nueva tarea</label>
       <input type="text" id="nuevaTarea" name="nuevaTarea" placeholder="Escribe una tarea..." aria-label="Nueva tarea">
+      
+      <input type="date" id="fechaTarea" name="fechaTarea" aria-label="Fecha para la tarea">
+      
       <button type="button" id="agregarTarea" aria-label="Agregar tarea">Agregar</button>
+    </div>
+
+    <!-- SISTEMA DE ORDENAMIENTO - MODIFICADO -->
+    <div class="ordenamiento">
+      <label for="criterioOrden" class="sr-only">Ordenar por</label>
+      <select id="criterioOrden" aria-label="Criterio de ordenamiento">
+        <option value="fecha">Fecha de creación</option>
+        <option value="prioridad">Prioridad</option>
+        <option value="estado">Estado (pendientes primero)</option>
+      </select>
+      
+      <button type="button" id="direccionOrden" aria-label="Dirección del ordenamiento" title="Orden ascendente">
+        ↑↓
+      </button>
     </div>
 
     <div class="botones">
@@ -71,6 +88,4 @@
     });
   </script>
 </body>
-  <!-- Deployment fix -->
 </html>
-
