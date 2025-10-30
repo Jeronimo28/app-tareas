@@ -40,11 +40,23 @@ input[type="text"] {
   border: 2px solid #f4d19b;
   background: #fffaf0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px; /* Previene zoom en iOS */
+  font-size: 16px;
   transition: border-color 0.3s;
 }
 
-input[type="text"]:focus {
+input[type="date"] {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid #f4d19b;
+  background: #fffaf0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  min-width: 140px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
   outline: none;
   border-color: #6b4f2f;
 }
@@ -140,7 +152,46 @@ li button:hover {
   background-color: #e0663f;
 }
 
-/* Líneas de libreta */
+/* Sistema de ordenamiento */
+.ordenamiento {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+#criterioOrden {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 2px solid #f4d19b;
+  background: #fffaf0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+
+#direccionOrden {
+  padding: 10px 15px;
+  background-color: #6b4f2f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+#direccionOrden:hover {
+  background-color: #5a4125;
+  transform: scale(1.05);
+}
+
+.ordenamiento-activo {
+  background-color: #f4d19b !important;
+  color: #6b4f2f !important;
+}
+
+/* Líneas de libreta - SOLUCIÓN DEFINITIVA */
 .container::before {
   content: "";
   position: absolute;
@@ -149,6 +200,7 @@ li button:hover {
   width: 2px;
   height: 100%;
   background: #f4d19b;
+  z-index: 1;
 }
 
 /* Estados de carga y feedback */
@@ -176,11 +228,29 @@ li button:hover {
   }
   
   .container {
-    padding: 20px 15px;
+    padding: 20px 15px 20px 25px;
+    margin-left: 0;
+  }
+  
+  .container::before {
+    left: 15px;
+    display: none;
+  }
+  
+  li {
+    margin-left: 0;
+    padding: 12px 10px;
+    position: relative;
+    z-index: 2;
   }
   
   .input-group {
     flex-direction: column;
+  }
+  
+  input[type="date"] {
+    min-width: auto;
+    width: 100%;
   }
   
   .botones {
@@ -190,6 +260,38 @@ li button:hover {
   .botones button {
     min-width: auto;
   }
+  
+  .ordenamiento {
+    flex-direction: column;
+  }
+}
+
+/* Estilos para prioridades */
+.btn-prioridad {
+  background: none !important;
+  border: none !important;
+  padding: 8px !important;
+  margin: 0 8px !important;
+  font-size: 16px !important;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-prioridad:hover {
+  transform: scale(1.2);
+}
+
+/* Bordes de colores según prioridad */
+.prioridad-alta {
+  border-left: 4px solid #ef5350 !important;
+}
+
+.prioridad-media {
+  border-left: 4px solid #ffa726 !important;
+}
+
+.prioridad-baja {
+  border-left: 4px solid #66bb6a !important;
 }
 
 /* Animaciones */
