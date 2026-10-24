@@ -251,6 +251,7 @@ li button:hover {
   input[type="date"] {
     min-width: auto;
     width: 100%;
+    box-sizing: border-box;
   }
   
   .botones {
