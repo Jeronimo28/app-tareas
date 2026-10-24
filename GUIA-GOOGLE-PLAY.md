@@ -9,7 +9,7 @@ la web a pantalla completa. Cuando actualizas la web, la app se actualiza sola.
 - [ ] Fusiona estos cambios en la rama que publica GitHub Pages y comprueba que
       `https://jeronimo28.github.io/app-tareas/` carga y funciona **sin conexión**
       (modo avión, después de abrirla una vez).
-- [ ] Edita `privacidad.html` y cambia `TU_CORREO_DE_CONTACTO` por tu correo.
+- [x] Correo de contacto en `privacidad.html`: mitareas.soporte@gmail.com
       URL de la política: `https://jeronimo28.github.io/app-tareas/privacidad.html`
 - [ ] Crea una cuenta de desarrollador en <https://play.google.com/console>
       (pago único de 25 USD y verificación de identidad).
