@@ -1,15 +1,18 @@
-const CACHE_NAME = 'tareas-app-v2.0';
+const CACHE_NAME = 'tareas-app-v2.1';
 const urlsToCache = [
-  '/app-tareas/',
-  '/app-tareas/index.html',
-  '/app-tareas/style.css',
-  '/app-tareas/app.js',
-  '/app-tareas/manifest.json'
+  './',
+  './index.html',
+  './style.css',
+  './app.js',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-maskable-512.png'
 ];
 
 self.addEventListener('install', event => {
   console.log('🛠️ Service Worker instalándose...');
-  
+
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -45,14 +48,20 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   // Ignorar favicon.ico y otros recursos no esenciales
-  if (event.request.url.includes('favicon.ico')) {
+  if (event.request.method !== 'GET' || event.request.url.includes('favicon.ico')) {
     return;
   }
-  
+
+  // ignoreSearch: style.css?v=3 y app.js?v=3 coinciden con su versión cacheada
   event.respondWith(
-    caches.match(event.request)
+    caches.match(event.request, { ignoreSearch: true })
       .then(response => {
-        return response || fetch(event.request);
+        return response || fetch(event.request).catch(() => {
+          // Sin conexión: las navegaciones caen en la página principal
+          if (event.request.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
+        });
       })
   );
 });
